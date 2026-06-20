@@ -56,7 +56,24 @@ def work():
 
 @app.route('/hobbies')
 def hobbies():
-    return render_template('hobbies.html', title="Hobbies", url=os.getenv("URL"))
+    hobbies = [
+        {
+            "image": "./static/img/hie_shrine.jpg",
+            "label": "Finding Hidden Gems",
+            "description": "Inari gates at Hie Shrine. Like Fushimi Inari but no crowds :)"
+        },
+        {
+            "image": "./static/img/mt_si.jpg",
+            "label": "Hiking", 
+            "description": "Beat the 30° incline on the the Kamikaze trail at Mount Si in Seattle, WA."
+        },
+        {
+            "image": "./static/img/mt_takao.jpg",
+            "label": "Mt. Takao",
+            "description": "The mountain locals frequent for a quick nature escape and Mt. Fuji views on a clear day"
+        },
+    ]
+    return render_template('hobbies.html', title="Hobbies", url=os.getenv("URL"), hobbies=hobbies)
 
 @app.route('/map')
 def map():
