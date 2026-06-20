@@ -2,6 +2,98 @@
 
 {% block content %}
 
-<!-- Insert work content here -->
+<h1 class="text-center">{{ title }}</h1>
+
+<section class="container mt-4">
+	<div class="row">
+		<div class="col-12 col-lg-8 offset-lg-2">
+			<div class="d-flex justify-content-end mb-2">
+				<button id="expandAllBtn" class="btn btn-sm btn-outline-primary">Expand all</button>
+			</div>
+			<div class="accordion" id="accordionExample">
+	{% for work in works %}
+	<div class="accordion-item">
+		<h2 class="accordion-header" id="heading{{ loop.index }}">
+			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+				<div class="w-100 d-flex justify-content-between align-items-center">
+					<div>
+						<div class="work-role">{{ work.role }}</div>
+						<div class="work-company text-muted">{{ work.company }}</div>
+					</div>
+					<div class="work-dates text-muted text-end">{{ work.dates }}</div>
+				</div>
+			</button>
+		</h2>
+		<div id="collapse{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#accordionExample">
+			<div class="accordion-body">
+				{{ work.description | safe }}
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+	</div>
+				</div>
+			</div>
+		</section>
+		<hr class="my-5">
+
+		<h1 class="text-center">Education</h1>
+		<section class="container mt-4 mb-5">
+			<div class="row">
+				<div class="col-12 col-lg-8 offset-lg-2">
+					<div class="accordion" id="educationAccordion">
+						{% for edu in education %}
+						<div class="accordion-item">
+							<h2 class="accordion-header" id="eduHeading{{ loop.index }}">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#eduCollapse{{ loop.index }}" aria-expanded="false" aria-controls="eduCollapse{{ loop.index }}">
+									<div class="w-100 d-flex justify-content-between align-items-center">
+										<div>
+											<div class="work-role">{{ edu.degree }}</div>
+											<div class="work-company text-muted">{{ edu.university }}</div>
+										</div>
+										<div class="work-dates text-muted text-end">{{ edu.dates }}</div>
+									</div>
+								</button>
+							</h2>
+							<div id="eduCollapse{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="eduHeading{{ loop.index }}" data-bs-parent="#educationAccordion">
+								<div class="accordion-body">
+									{{ edu.description | safe }}
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<script>
+			(function(){
+				var btn = document.getElementById('expandAllBtn');
+				if (!btn) return;
+				btn.addEventListener('click', function(){
+					var selector = '#accordionExample .accordion-collapse, #educationAccordion .accordion-collapse';
+					var collapses = Array.from(document.querySelectorAll(selector));
+
+					// store original data-bs-parent values
+					var originalParents = collapses.map(function(el){ return el.getAttribute('data-bs-parent'); });
+
+					// Temporarily remove data-bs-parent so multiple panels can be shown simultaneously
+					collapses.forEach(function(el){ el.removeAttribute('data-bs-parent'); });
+
+					// Show all
+					collapses.forEach(function(el){
+						var inst = bootstrap.Collapse.getOrCreateInstance(el);
+						inst.show();
+					});
+
+					// Restore data-bs-parent so accordion behavior returns for manual toggles
+					collapses.forEach(function(el, idx){
+						var val = originalParents[idx];
+						if (val) el.setAttribute('data-bs-parent', val);
+					});
+				});
+			})();
+		</script>
 
 {% endblock %}
