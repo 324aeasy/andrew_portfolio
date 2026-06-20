@@ -61,19 +61,23 @@ def hobbies():
         {
             "image": "./static/img/hie_shrine.jpg",
             "label": "Finding Hidden Gems",
-            "description": "Inari gates at Hie Shrine. Like Fushimi Inari but no crowds :)"
+            "description": "Inari gates at Hie Shrine. Like Fushimi Inari but no crowds :)",
+            "caption_class": "caption-cyan"
         },
         {
             "image": "./static/img/mt_si.jpg",
             "label": "Hiking", 
-            "description": "Beat the 30° incline on the the Kamikaze trail at Mount Si in Seattle, WA."
+            "description": "Mount Si in Seattle, WA",
+            "caption_class": "caption-blue"
         },
         {
-            "image": "./static/img/mt_takao.jpg",
-            "label": "Mt. Takao",
-            "description": "The mountain locals frequent for a quick nature escape and Mt. Fuji views on a clear day"
+            "image": "./static/img/ndc_podium.jpg",
+            "label": "Volunteering at Conferences",
+            "description": "NDC Toronto 2026",
+            "caption_class": "caption-white"
         },
     ]
+    
     return render_template('hobbies.html', title="Hobbies", url=os.getenv("URL"), hobbies=hobbies)
 
 @app.route('/map')

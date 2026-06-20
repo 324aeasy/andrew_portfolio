@@ -14,7 +14,7 @@
     {% for hobby in hobbies %}
     <div class="carousel-item {% if loop.first %}active{% endif %}">
       <img src="{{ hobby.image }}" class="d-block w-100" alt="{{ hobby.label }}">
-      <div class="carousel-caption d-none d-md-block">
+      <div class="carousel-caption d-none d-md-block {{ hobby.caption_class or '' }}">
         <h5>{{ hobby.label }}</h5>
         <p>{{ hobby.description }}</p>
       </div>
