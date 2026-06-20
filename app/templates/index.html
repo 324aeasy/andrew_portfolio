@@ -1,40 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta property="og:title" content="Personal Portfolio">
-    <meta property="og:description" content="My Personal Portfolio">
-    <meta property="og:url" content="{{ url }}">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
-
-    <link lang='sass' rel="stylesheet" href="./static/styles/main.css">
-    <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
-    <title>{{ title }}</title>
-</head>
-
-<body>
-    <header class="nav-bar">
-        <div class="nav-content">
-            <a href="/">
-                <div class="nav-logo">
-                    <img src="./static/img/logo.svg" />
-                </div>
-            </a>
-        </div>
-    </header>
-
+{% block content %}
     <div class="profile">
         <div id="profile-picture" class="profile-picture">
             <img src="./static/img/andrew.jpg">
         </div>
         <h1>{{ title }}</h1>
     </div>
-</body>
-</html>
+
+    
+    <section class="container mt-5">
+        <header class="mb-4">
+            <h2>About</h2>
+        </header>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Background</h3>
+                <p>Hey, I'm Andrew! I am a MSCS student at UT Austin and am proud to be a Summer 2026 MLH Production Engineering Fellow.  </p>
+            </div>
+            <div class="col-md-6">
+                <h3>Interests</h3>
+                <p>Hiking, trip planning, and Settlers of Catan. Occasionally I visit technical conferences, check out the Lightning Talk I did at CppNorth 2025 below!</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- YouTube embed: responsive Bootstrap ratio -->
+    <section class="container mt-4 mb-5">
+        <div class="ratio ratio-16x9">
+            <iframe width="560" height="315" src="{{ lightning_talk_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>        </div>
+    </section>
+{% endblock %}
+
