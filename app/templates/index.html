@@ -26,10 +26,15 @@
         </div>
     </section>
     
-    <!-- YouTube embed: responsive Bootstrap ratio -->
+    <!-- YouTube embed: occupies middle two quarters (quadrants 2 and 3) -->
     <section class="container mt-4 mb-5">
-        <div class="ratio ratio-16x9">
-            <iframe width="560" height="315" src="{{ lightning_talk_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>        </div>
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                <div class="ratio ratio-16x9">
+                    <iframe src="{{ lightning_talk_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
     </section>
 {% endblock %}
 
