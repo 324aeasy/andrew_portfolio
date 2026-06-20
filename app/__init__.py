@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 LIGHTNING_TALK_URL = "https://www.youtube.com/embed/rj4qNrLJUL8?si=FG0wF17vJHMiCPcs"
+MAP_URL = "https://www.google.com/maps/d/u/0/embed?mid=1b-h0riTTWJiwujiu2AjCJCo1p9us2XI&ehbc=2E312F"
 
 app = Flask(__name__)
 
@@ -77,4 +78,4 @@ def hobbies():
 
 @app.route('/map')
 def map():
-    return render_template('map.html', title="Map", url=os.getenv("URL"))
+    return render_template('map.html', title="Map", url=os.getenv("URL",), map_url=MAP_URL)
