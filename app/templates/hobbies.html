@@ -2,6 +2,33 @@
 
 {% block content %}
 
-<!-- Insert hobbies content here -->
+<h1 class="text-center">{{ title }}</h1>
+
+<div id="carouselExampleCaptions" class="carousel slide carousel-portrait">
+  <div class="carousel-indicators">
+    {% for hobby in hobbies %}
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ loop.index0 }}" class="{% if loop.first %}active{% endif %}" {% if loop.first %}aria-current="true"{% endif %} aria-label="Slide {{ loop.index }}"></button>
+    {% endfor %}
+  </div>
+  <div class="carousel-inner">
+    {% for hobby in hobbies %}
+    <div class="carousel-item {% if loop.first %}active{% endif %}">
+      <img src="{{ hobby.image }}" class="d-block w-100" alt="{{ hobby.label }}">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>{{ hobby.label }}</h5>
+        <p>{{ hobby.description }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 
 {% endblock %}
