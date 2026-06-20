@@ -117,6 +117,25 @@ body {
     .carousel-portrait { width: 90%; }
 }
 
+/* Make carousel captions readable on light/bright images */
+.carousel-portrait .carousel-caption,
+.carousel-portrait .carousel-caption h5,
+.carousel-portrait .carousel-caption p {
+    color: #B0B0B0 !important;
+    /* no outline */
+}
+
+/* Slightly larger caption text for readability */
+.carousel-portrait .carousel-caption {
+    font-size: 1.05rem;
+}
+.carousel-portrait .carousel-caption h5 {
+    font-size: 1.25rem;
+}
+.carousel-portrait .carousel-caption p {
+    font-size: 1rem;
+}
+
 /* Accordion work header styles */
 .accordion .work-role {
     font-size: 1.05rem;
@@ -132,4 +151,80 @@ body {
 @media (max-width: 576px) {
     .accordion .work-role { font-size: 1rem; }
     .accordion .work-dates { font-size: 0.9rem; }
+}
+
+/* Per-caption color classes (no outline) */
+.caption-white { color: #FFFFFF !important; -webkit-text-stroke: 0; text-stroke: 0; text-shadow: none; }
+.caption-black { color: #000000 !important; -webkit-text-stroke: 0; text-stroke: 0; text-shadow: none; }
+.caption-green { color: #00FF00 !important; -webkit-text-stroke: 0; text-stroke: 0; text-shadow: none; }
+.caption-cyan { color: #00FFFF !important; -webkit-text-stroke: 0; text-stroke: 0; text-shadow: none; }
+.caption-red { color: #FF0000 !important; -webkit-text-stroke: 0; text-stroke: 0; text-shadow: none; }
+.caption-cream { color: #FFFFE0 !important; -webkit-text-stroke: 0; text-stroke: 0; text-shadow: none; }
+.caption-blue { color: #000080 !important; -webkit-text-stroke: 0; text-stroke: 0; text-shadow: none; }
+.caption-gold { color: #FFD700 !important; -webkit-text-stroke: 0; text-stroke: 0; text-shadow: none; }
+.caption-brown { color: #513714 !important; -webkit-text-stroke: 0; text-stroke: 0; text-shadow: none; }
+
+/* Stronger specificity so these classes override the generic .carousel-portrait caption color */
+.carousel-portrait .carousel-caption.caption-white,
+.carousel-portrait .carousel-caption.caption-white h5,
+.carousel-portrait .carousel-caption.caption-white p {
+    color: #FFFFFF !important;
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+}
+.carousel-portrait .carousel-caption.caption-black,
+.carousel-portrait .carousel-caption.caption-black h5,
+.carousel-portrait .carousel-caption.caption-black p {
+    color: #000000 !important;
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+}
+.carousel-portrait .carousel-caption.caption-green,
+.carousel-portrait .carousel-caption.caption-green h5,
+.carousel-portrait .carousel-caption.caption-green p {
+    color: #00FF00 !important;
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+}
+.carousel-portrait .carousel-caption.caption-cyan,
+.carousel-portrait .carousel-caption.caption-cyan h5,
+.carousel-portrait .carousel-caption.caption-cyan p {
+    color: #00FFFF !important;
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+}
+.carousel-portrait .carousel-caption.caption-red,
+.carousel-portrait .carousel-caption.caption-red h5,
+.carousel-portrait .carousel-caption.caption-red p {
+    color: #FF0000 !important;
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+}
+.carousel-portrait .carousel-caption.caption-cream,
+.carousel-portrait .carousel-caption.caption-cream h5,
+.carousel-portrait .carousel-caption.caption-cream p {
+    color: #FFFFE0 !important;
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+}
+.carousel-portrait .carousel-caption.caption-blue,
+.carousel-portrait .carousel-caption.caption-blue h5,
+.carousel-portrait .carousel-caption.caption-blue p {
+    color: #000080 !important;
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+}
+.carousel-portrait .carousel-caption.caption-gold,
+.carousel-portrait .carousel-caption.caption-gold h5,
+.carousel-portrait .carousel-caption.caption-gold p {
+    color: #FFD700 !important;
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+}
+.carousel-portrait .carousel-caption.caption-brown,
+.carousel-portrait .carousel-caption.caption-brown h5,
+.carousel-portrait .carousel-caption.caption-brown p {
+    color: #513714 !important;
+    -webkit-text-stroke: 0;
+    text-shadow: none;
 }
