@@ -15,7 +15,44 @@ def index():
 
 @app.route('/work')
 def work():
-    return render_template('work.html', title="Work", url=os.getenv("URL"))
+    # sample `works` as a list of dicts: each dict has keys role, company, dates, description
+    works = [
+        {
+            "role": "Production Engineering Fellow",
+            "company": "Meta and Major League Hacking",
+            "dates": "2026 - Present",
+            "description": "<p>Developing a Flask personal portfolio website adhering to DevOps practices, with a focus on CI/CD, containerization, cloud deployment via DigitalOcean, and automated testing.</p>"
+        },
+        {
+            "role": "Data Engineer",
+            "company": "Deloitte",
+            "dates": "2022 - 2024",
+            "description": "<p>Shipped multiple $500k+ enterprise-scale technical implementation and migrations for clients in banking, insurance, and healthcare sectors. Also the Google Cloud Alliance lead for Omnia AI, hosting monthly townhalls.</p>"
+        },
+        {
+            "role": "Data Science/ML Intern",
+            "company": "Axcessiom Technologies",
+            "dates": "2021 - 2022",
+            "description": "<p>Built speech and facial recognition models to enable disabled drivers to operate auxiliary vehicle functions (e.g., turn signals, windshield wipers) with voice commands or facial gestures.</p>"
+        }
+    ]
+
+    education = [
+        {
+            "degree": "M.S. Computer Science",
+            "university": "University of Texas at Austin",
+            "dates": "2025 - Present",
+            "description": "<p>Coursework: Structure and Implementation of Programming Languages, Deep Learning</p>"
+        },
+        {
+            "degree": "B.S. Software Engineering",
+            "university": "Ontario Tech University",
+            "dates": "2018 - 2022",
+            "description": "<p>GPA: 4.06/4.3</p>"
+        }
+    ]
+
+    return render_template('work.html', title="Work", url=os.getenv("URL"), works=works, education=education)
 
 @app.route('/hobbies')
 def hobbies():

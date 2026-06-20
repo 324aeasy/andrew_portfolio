@@ -95,3 +95,20 @@ body {
     font-size: 50px;
     font-weight: 700;
 }
+
+/* Accordion work header styles */
+.accordion .work-role {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+.accordion .work-company {
+    font-size: 0.95rem;
+}
+.accordion .work-dates {
+    font-size: 0.95rem;
+}
+
+@media (max-width: 576px) {
+    .accordion .work-role { font-size: 1rem; }
+    .accordion .work-dates { font-size: 0.9rem; }
+}
