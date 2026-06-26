@@ -4,15 +4,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-LIGHTNING_TALK_URL = "https://www.youtube.com/embed/rj4qNrLJUL8?si=FG0wF17vJHMiCPcs"
-MAP_URL = "https://www.google.com/maps/d/u/0/embed?mid=1b-h0riTTWJiwujiu2AjCJCo1p9us2XI&ehbc=2E312F"
-
 app = Flask(__name__)
 
+app.config['LIGHTNING_TALK_URL'] = os.getenv("LIGHTNING_TALK_URL")
+app.config['MAP_URL'] = os.getenv("MAP_URL")
 
 @app.route('/')
 def index():
-    return render_template('index.html', title="Andrew Lai", url=os.getenv("URL"), lightning_talk_url=LIGHTNING_TALK_URL)
+    return render_template('index.html', title="Andrew Lai", url=os.getenv("URL"), lightning_talk_url=app.config['LIGHTNING_TALK_URL'])
 
 @app.route('/work')
 def work():
@@ -82,4 +81,4 @@ def hobbies():
 
 @app.route('/map')
 def map():
-    return render_template('map.html', title="Map", url=os.getenv("URL",), map_url=MAP_URL)
+    return render_template('map.html', title="Map", url=os.getenv("URL",), map_url=app.config['MAP_URL'])
