@@ -7,3 +7,4 @@ flask.sqlite
 python311-venv
 .python-version
 .vs/
+python3-virtualenv
