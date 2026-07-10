@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 from dotenv import load_dotenv
 from peewee import *
 import datetime
+import hashlib
 from playhouse.shortcuts import model_to_dict
 
 load_dotenv()
@@ -106,17 +107,28 @@ def hobbies():
 def map():
     return render_template('map.html', title="Map", url=os.getenv("URL",), map_url=app.config['MAP_URL'])
 
+@app.route('/timeline')
+def timeline():
+    timeline_posts = [
+        model_to_dict(p)
+        for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
+    ]
+
+    for post in timeline_posts:
+        normalized_email = post['email'].strip().lower().encode('utf-8')
+        email_hash = hashlib.md5(normalized_email).hexdigest()
+        post['gravatar_url'] = f"https://www.gravatar.com/avatar/{email_hash}?d=identicon&s=512"
+
+    return render_template('timeline.html', title="Timeline", url=os.getenv("URL"), timeline_posts=timeline_posts)
+
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
-    post_id = request.form['id']
     name = request.form['name']
     email = request.form['email']
     content = request.form['content']
 
-    try:
-        post_id = int(post_id)
-    except ValueError:
-        return {'error': 'id must be an integer'}, 400
+    max_post_id = TimelinePost.select(fn.MAX(TimelinePost.id)).scalar()
+    post_id = 0 if max_post_id is None else max_post_id + 1
 
     timeline_post = TimelinePost.create(id=post_id, name=name, email=email, content=content)
 
