@@ -15,7 +15,7 @@ cd $PROJECT_DIR || { echo "Directory $PROJECT_DIR not found"; exit 1; }
 git fetch && git reset origin/main --hard
 
 # 4. Enter Python venv and install dependencies
-source VENV_PATH/bin/activate
+source $VENV_PATH/bin/activate
 pip install -r requirements.txt
 
 # 5. Start new detached tmux session
