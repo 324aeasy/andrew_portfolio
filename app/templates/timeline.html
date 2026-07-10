@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-4 py-md-5">
+  <h1 class="text-center mb-4">{{ title }}</h1>
+
+  <div class="row justify-content-center mb-5">
+    <div class="col-12 col-lg-8">
+      <form id="timeline-post-form" class="card shadow-sm border-0" method="post" action="/api/timeline_post">
+        <div class="card-body p-4">
+          <h2 class="h4 mb-3">Add Timeline Post</h2>
+
+          <div class="mb-3">
+            <label for="timeline-name" class="form-label">Name</label>
+            <input id="timeline-name" name="name" type="text" class="form-control" placeholder="Your name" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="timeline-email" class="form-label">Email</label>
+            <input id="timeline-email" name="email" type="email" class="form-control" placeholder="name@example.com" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="timeline-content" class="form-label">Content</label>
+            <textarea id="timeline-content" name="content" class="form-control" rows="4" placeholder="Share an update" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Post</button>
+          <div id="timeline-form-message" class="mt-3 small"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for post in timeline_posts %}
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="{{ post.gravatar_url }}" class="card-img-top" alt="Gravatar for {{ post.name }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ post.name }}</h5>
+              <h6 class="card-subtitle mb-2 text-body-secondary">{{ post.email }}</h6>
+              <p class="card-text">{{ post.content }}</p>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="col-12">
+          <p class="text-center text-body-secondary mb-0">No timeline posts yet. Be the first to post.</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const timelineForm = document.getElementById('timeline-post-form');
+  const formMessage = document.getElementById('timeline-form-message');
+
+  timelineForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    formMessage.className = 'mt-3 small text-body-secondary';
+    formMessage.textContent = 'Posting...';
+
+    const formData = new FormData(timelineForm);
+
+    try {
+      const response = await fetch('/api/timeline_post', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Unable to create timeline post.');
+      }
+
+      window.location.reload();
+    } catch (error) {
+      formMessage.className = 'mt-3 small text-danger';
+      formMessage.textContent = error.message;
+    }
+  });
+</script>
+
+{% endblock %}
