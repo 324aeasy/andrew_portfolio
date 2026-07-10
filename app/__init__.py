@@ -1,10 +1,33 @@
 import os
 from flask import Flask, render_template, request
 from dotenv import load_dotenv
+from peewee import *
+import datetime
+from playhouse.shortcuts import model_to_dict
 
 load_dotenv()
 
 app = Flask(__name__)
+mydb = MySQLDatabase(
+    os.getenv("MYSQL_DATABASE"),
+    user=os.getenv("MYSQL_USER"),
+    password=os.getenv("MYSQL_PASSWORD"),
+    host=os.getenv("MYSQL_HOST"),
+    port=3306
+)
+
+class TimelinePost(Model):
+    id = IntegerField(primary_key=True)
+    name = CharField()
+    email = CharField()
+    content = TextField()
+    created_at = DateTimeField(default=datetime.datetime.now)
+
+    class Meta:
+        database = mydb
+
+mydb.connect()
+mydb.create_tables([TimelinePost])
 
 app.config['LIGHTNING_TALK_URL'] = os.getenv("LIGHTNING_TALK_URL")
 app.config['MAP_URL'] = os.getenv("MAP_URL")
@@ -82,3 +105,47 @@ def hobbies():
 @app.route('/map')
 def map():
     return render_template('map.html', title="Map", url=os.getenv("URL",), map_url=app.config['MAP_URL'])
+
+@app.route('/api/timeline_post', methods=['POST'])
+def post_time_line_post():
+    post_id = request.form['id']
+    name = request.form['name']
+    email = request.form['email']
+    content = request.form['content']
+
+    try:
+        post_id = int(post_id)
+    except ValueError:
+        return {'error': 'id must be an integer'}, 400
+
+    timeline_post = TimelinePost.create(id=post_id, name=name, email=email, content=content)
+
+    return model_to_dict(timeline_post)
+
+@app.route('/api/timeline_post', methods=['GET'])
+def get_time_line_post():
+    return {
+        'timeline_posts': [
+            model_to_dict(p)
+            for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())
+        ]
+    }
+
+@app.route('/api/timeline_post', methods=['DELETE'])
+def delete_time_line_post():
+    post_id = request.args.get('id') or request.form.get('id')
+
+    if post_id is None:
+        return {'error': 'id is required'}, 400
+
+    try:
+        post_id = int(post_id)
+    except ValueError:
+        return {'error': 'id must be an integer'}, 400
+
+    deleted_count = TimelinePost.delete().where(TimelinePost.id == post_id).execute()
+
+    if deleted_count == 0:
+        return {'error': 'timeline post not found'}, 404
+
+    return {'deleted': post_id}
