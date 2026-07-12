@@ -19,7 +19,8 @@ source $VENV_PATH/bin/activate
 pip install -r requirements.txt
 
 # 5. Start new detached tmux session
-tmux new-session -d -s flask-server 'source python3-virtualenv/bin/activate && flask run --host=0.0.0.0 --port=5000 && tail -f /dev/null'
+tmux new-session -d -s flask-server "cd $PROJECT_DIR && source $VENV_PATH/bin/activate && flask run --host=0.0.0.0 --port=5000; tail -f /dev/null"
+
 
 echo "Deployment complete!"
 echo "Flask server running in tmux session: flask-server"
