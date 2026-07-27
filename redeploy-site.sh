@@ -33,5 +33,5 @@ docker compose -f docker-compose.prod.yml up -d --build
 # tmux new-session -d -s flask-server "cd $PROJECT_DIR && source $VENV_PATH/bin/activate && flask run --host=0.0.0.0 --port=5000; tail -f /dev/null"
 
 
-echo "Deployment complete!"
-echo "Flask server running in tmux session: flask-server"
+echo "Docker deployment complete!"
+# echo "Flask server running in tmux session: flask-server"
