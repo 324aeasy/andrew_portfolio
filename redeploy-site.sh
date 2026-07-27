@@ -6,7 +6,7 @@ VENV_PATH="/root/andrew_portfolio/python3-virtualenv"
 echo "Starting deployment..."
 
 # 1. Kill all existing tmux sessions
-tmux kill-server
+# tmux kill-server
 
 # 2. cd into project folder, or exit with error if not found
 cd $PROJECT_DIR || { echo "Directory $PROJECT_DIR not found"; exit 1; }
@@ -14,14 +14,20 @@ cd $PROJECT_DIR || { echo "Directory $PROJECT_DIR not found"; exit 1; }
 # 3. Fetch latest changes and reset
 git fetch && git reset origin/main --hard
 
+# 4. Docker spindown
+docker compose -f docker-compose.prod.yml down
+
+# 5. Docker compose
+docker compose -f docker-compose.prod.yml up -d --build
+
 # 4. Enter Python venv and install dependencies
-source $VENV_PATH/bin/activate
-pip install -r requirements.txt
+# source $VENV_PATH/bin/activate
+# pip install -r requirements.txt
 
 # 5. Restart myportfolio service
-systemctl daemon-reload
-systemctl restart myportfolio
-systemctl status myportfolio
+# systemctl daemon-reload
+# systemctl restart myportfolio
+# systemctl status myportfolio
 
 # 5. Start new detached tmux session
 # tmux new-session -d -s flask-server "cd $PROJECT_DIR && source $VENV_PATH/bin/activate && flask run --host=0.0.0.0 --port=5000; tail -f /dev/null"

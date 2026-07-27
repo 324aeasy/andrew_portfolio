@@ -54,7 +54,7 @@ def work():
             "description": "<p>Developing a Flask personal portfolio website adhering to DevOps practices, with a focus on CI/CD, containerization, cloud deployment via DigitalOcean, and automated testing.</p>"
         },
         {
-            "role": "Data Engineer",
+            "role": "Data Engineer Consultant",
             "company": "Deloitte",
             "dates": "2022 - 2024",
             "description": "<p>Shipped multiple $500k+ enterprise-scale technical implementation and migrations for clients in banking, insurance, and healthcare sectors. Also the Google Cloud Alliance lead for Omnia AI, hosting monthly townhalls.</p>"
