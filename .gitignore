@@ -10,3 +10,4 @@ python311-venv
 python3-virtualenv
 .postman
 postman
+.docker/
