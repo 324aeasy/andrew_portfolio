@@ -76,8 +76,24 @@
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Unable to create timeline post.');
+        if (response.status === 429 || response.status === 503) {
+          throw new Error('Rate limit reached. Please wait about a minute before posting again.');
+        }
+
+        let errorMessage = 'Unable to create timeline post.';
+        const contentType = response.headers.get('content-type') || '';
+
+        if (contentType.includes('application/json')) {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorMessage;
+        } else {
+          const errorText = await response.text();
+          if (errorText && errorText.trim()) {
+            errorMessage = errorText;
+          }
+        }
+
+        throw new Error(errorMessage);
       }
 
       window.location.reload();
