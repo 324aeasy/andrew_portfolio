@@ -51,7 +51,7 @@ def work():
             "role": "Production Engineering Fellow",
             "company": "Meta and Major League Hacking",
             "dates": "2026 - Present",
-            "description": "<p>Developing a Flask personal portfolio website adhering to DevOps practices, with a focus on CI/CD, containerization, cloud deployment using DigitalOcean, and automated testing.</p>"
+            "description": "<p>Developing a Flask personal portfolio website adhering to DevOps practices, with a focus on CI/CD, containerization, cloud deployment via DigitalOcean, and automated testing.</p>"
         },
         {
             "role": "Data Engineer Consultant",
