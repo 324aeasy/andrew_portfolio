@@ -9,6 +9,8 @@ from app import app
 class AppTestCase(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
+        app.config['LIGHTNING_TALK_URL'] = 'https://www.youtube.com/embed/rj4qNrLJUL8?si=FG0wF17vJHMiCPcs'
+        app.config['MAP_URL'] = 'https://www.google.com/maps/d/u/0/embed?mid=1b-h0riTTWJiwujiu2AjCJCo1p9us2XI&ehbc=2E312F'
     def test_home(self):
         response = self.client.get('/')
         assert response.status_code == 200
