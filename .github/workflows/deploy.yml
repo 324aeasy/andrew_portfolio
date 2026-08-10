@@ -31,7 +31,7 @@ jobs:
       - name: Deploy site
         run: ssh my-vps '${{ secrets.PROJECT_ROOT }}/redeploy-site.sh && docker compose -f ${{ secrets.PROJECT_ROOT }}/docker-compose.prod.yml ps'
 
-- name: Send Discord notification on success
+      - name: Send Discord notification on success
         if: success()
         run: |
           curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" -d "content=🚀 Deployment Successful"
